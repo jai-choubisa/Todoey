@@ -12,9 +12,17 @@ class ToDoListViewController: UITableViewController {
 
     var itemArray = ["Buy Domain","Write Code","Host Project"]
     
+    //To store data with persistence, we can use UserDefaults to store data in user's device with key value pair.
+    var delfaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        //get data from UserDefaults storages
+        if let item = delfaults.array(forKey: "toDoListArray") as? [String] {
+            itemArray = item
+        }
     }
     
     //MARK - TableView Datasource method
@@ -54,6 +62,10 @@ class ToDoListViewController: UITableViewController {
             
             if let newItem = itemTextField.text {
                 self.itemArray.append(newItem)
+                
+                //save data using UserDefaults
+                self.delfaults.set(self.itemArray, forKey: "toDoListArray")
+                
                 self.tableView.reloadData()
             }
         }
