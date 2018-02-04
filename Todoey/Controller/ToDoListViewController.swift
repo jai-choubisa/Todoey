@@ -10,7 +10,7 @@ import UIKit
 
 class ToDoListViewController: UITableViewController {
 
-    var itemArray = ["Buy Domain","Write Code","Host Project"]
+    var itemArray = [Item]()
     
     //To store data with persistence, we can use UserDefaults to store data in user's device with key value pair.
     var delfaults = UserDefaults.standard
@@ -20,16 +20,20 @@ class ToDoListViewController: UITableViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         //get data from UserDefaults storages
-        if let item = delfaults.array(forKey: "toDoListArray") as? [String] {
-            itemArray = item
-        }
+//        if let item = delfaults.array(forKey: "toDoListArray") as? [Item] {
+//            itemArray = item
+//        }
     }
     
     //MARK - TableView Datasource method
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "toDoListTableView", for: indexPath)
         
-        cell.textLabel?.text = itemArray[indexPath.row]
+        let item = itemArray[indexPath.row]
+        
+        cell.textLabel?.text = item.title
+        
+        cell.accessoryType = item.done ?  .checkmark : .none
         
         return cell
     }
@@ -40,13 +44,9 @@ class ToDoListViewController: UITableViewController {
     
     //MARK - Table cell selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cellSelected = tableView.cellForRow(at: indexPath)
+        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         
-        if cellSelected?.accessoryType == .checkmark {
-            cellSelected?.accessoryType = .none
-        }else {
-            cellSelected?.accessoryType = .checkmark
-        }
+        tableView.reloadData()
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -60,11 +60,15 @@ class ToDoListViewController: UITableViewController {
         let alertAction = UIAlertAction(title: "Add", style: .default) {
             (action) in
             
-            if let newItem = itemTextField.text {
+            if let newItemTitle = itemTextField.text {
+                let newItem = Item()
+                
+                newItem.title = newItemTitle
+                
                 self.itemArray.append(newItem)
                 
-                //save data using UserDefaults
-                self.delfaults.set(self.itemArray, forKey: "toDoListArray")
+                //save data using UserDefaults - can string array but not custom class array
+                //self.delfaults.set(self.itemArray, forKey: "toDoListArray")
                 
                 self.tableView.reloadData()
             }
