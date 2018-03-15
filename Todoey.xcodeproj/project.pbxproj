@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		032B22DE2026D07D00C7ED84 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032B22DD2026D07D00C7ED84 /* Item.swift */; };
+		030D7F3B20275FB9009A088E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 030D7F3920275FB9009A088E /* DataModel.xcdatamodeld */; };
+		03DEC4842058BFED00024783 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DEC4832058BFED00024783 /* CategoryViewController.swift */; };
 		03EA58592024EF2D007F8486 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EA58582024EF2D007F8486 /* AppDelegate.swift */; };
 		03EA585B2024EF2D007F8486 /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EA585A2024EF2D007F8486 /* ToDoListViewController.swift */; };
 		03EA585E2024EF2D007F8486 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03EA585C2024EF2D007F8486 /* Main.storyboard */; };
@@ -16,7 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		032B22DD2026D07D00C7ED84 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		030D7F3A20275FB9009A088E /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		03DEC4832058BFED00024783 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		03EA58552024EF2D007F8486 /* Todoey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todoey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03EA58582024EF2D007F8486 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03EA585A2024EF2D007F8486 /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
@@ -40,7 +42,7 @@
 		032B22DF2026D08700C7ED84 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				032B22DD2026D07D00C7ED84 /* Item.swift */,
+				030D7F3920275FB9009A088E /* DataModel.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -56,6 +58,7 @@
 		032B22E12026D09F00C7ED84 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				03DEC4832058BFED00024783 /* CategoryViewController.swift */,
 				03EA585A2024EF2D007F8486 /* ToDoListViewController.swift */,
 			);
 			path = Controller;
@@ -171,8 +174,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03DEC4842058BFED00024783 /* CategoryViewController.swift in Sources */,
 				03EA585B2024EF2D007F8486 /* ToDoListViewController.swift in Sources */,
-				032B22DE2026D07D00C7ED84 /* Item.swift in Sources */,
+				030D7F3B20275FB9009A088E /* DataModel.xcdatamodeld in Sources */,
 				03EA58592024EF2D007F8486 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,11 +314,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P96UXWS77D;
 				INFOPLIST_FILE = Todoey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sushiltech.Todoey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -324,11 +331,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P96UXWS77D;
 				INFOPLIST_FILE = Todoey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sushiltech.Todoey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -356,6 +366,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		030D7F3920275FB9009A088E /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				030D7F3A20275FB9009A088E /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 030D7F3A20275FB9009A088E /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 03EA584D2024EF2D007F8486 /* Project object */;
 }
