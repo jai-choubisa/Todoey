@@ -7,14 +7,13 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class CategoryViewController: UITableViewController {
 
-    var categories = [Category]()
+    let realm = try! Realm()
     
-    //MARK: - Store Data using CoreData
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var categories : Results<Category>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,15 +25,13 @@ class CategoryViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         
-        let item = categories[indexPath.row]
-        
-        cell.textLabel?.text = item.name
+        cell.textLabel?.text = categories?[indexPath.row].name ?? "Category not added yet"
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return categories?.count ?? 1
     }
     
     //MARK: - Table cell selected
@@ -46,31 +43,29 @@ class CategoryViewController: UITableViewController {
         let itemsViewObject = segue.destination as! ToDoListViewController
         
         if let indexPath = tableView.indexPathForSelectedRow {
-            itemsViewObject.selectedCategory = categories[indexPath.row]
+            itemsViewObject.selectedCategory = categories?[indexPath.row]
         }
         
     }
     
     //MARK: - Save New Item
-    func saveItems() {
-        //Method 3 - Core Data
+    func saveItems(category : Category) {
+        
         do {
-            try context.save()
+            try realm.write {
+                realm.add(category)
+            }
         }catch {
-            print("Error in saving core data in saveItems - \(error)")
+            print("Error adding category \(error)")
         }
         
         tableView.reloadData()
     }
     
     //MARK: - Load Saved Items
-    func loadItems(with request : NSFetchRequest<Category> = Category.fetchRequest()){
-        //let request : NSFetchRequest<Category> = Category.fetchRequest()
-        do {
-            categories = try context.fetch(request)
-        }catch {
-            print("Error in fetch Category - \(error)")
-        }
+    func loadItems(){
+        
+        categories = realm.objects(Category.self)
         
         tableView.reloadData()
     }
@@ -87,13 +82,11 @@ class CategoryViewController: UITableViewController {
                 //let newItem = Category()
                 
                 //M3 - Using Core Data
-                let newItem = Category(context: self.context)
+                let newItem = Category()
                 
                 newItem.name = newItemTitle
                 
-                self.categories.append(newItem)
-                
-                self.saveItems()
+                self.saveItems(category : newItem)
                 
                 //save data using UserDefaults - can string array but not custom class array
                 //self.delfaults.set(self.categories, forKey: "toDoListArray")
